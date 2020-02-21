@@ -1,5 +1,5 @@
 {
-  "name": "credit-card-checker",
+  "name": "react-cc-validation",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
