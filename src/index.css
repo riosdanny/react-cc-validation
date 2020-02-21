@@ -16,6 +16,11 @@ html {
   margin-top: 12%; /* hacky, ugh */
 }
 
+footer {
+  padding-top: 25px;
+  text-align: center;
+}
+
 .header {
   text-align: center;
 }

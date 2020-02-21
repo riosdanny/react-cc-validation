@@ -1,8 +1,8 @@
 import React from 'react';
-import Visa from './assets/visa.png';
-import Mastercard from './assets/mastercard.png';
-import Discover from './assets/discover.png';
-import Amex from './assets/amex.png';
+import Visa from './assets/icons8-visa.svg';
+import Mastercard from './assets/icons8-mastercard.svg';
+import Discover from './assets/icons8-discover.svg';
+import Amex from './assets/icons8-amex.svg';
 
 const prefixes = new Map([
   ['Visa', '4'],
@@ -32,7 +32,7 @@ class CreditCardForm extends React.Component {
       maxLength: 16,
       cardNumber: '',
       placeholder: 'Enter credit card number',
-      activeVisa: false,
+      activeVisa: false, // TODO: Clean this up
       activeMastercard: false,
       activeDiscover: false,
       activeAmex: false,
@@ -134,13 +134,11 @@ class CreditCardForm extends React.Component {
           <button className="reset" onClick={this.handleClick}>reset</button>
         </div>
         <div className="error"></div>
-        <div id="logos-active">
-          <Logo type={Visa} 
+        <div>
+        <Logo type={Visa} 
             alt="Visa"
             active={this.state.activeVisa}
           />
-        </div>
-        <div id="logos-inactive">
           <Logo type={Mastercard} 
             alt= "Mastercard"
             active={this.state.activeMastercard}
@@ -154,12 +152,6 @@ class CreditCardForm extends React.Component {
             active={this.state.activeAmex}
           />
         </div>
-        <div className="coming-soon wrapper">
-          <div></div>
-          <div>
-            <span>coming soon</span>
-          </div>
-        </div>
       </>
     );
   }
@@ -167,8 +159,14 @@ class CreditCardForm extends React.Component {
 
 function App() {
   return (
-    <div className="cc-form">
-      <CreditCardForm />
+    <div className="wrapper">
+      <h1 class="header">Credit Card Number Validator</h1>
+      <div className="cc-form">
+        <CreditCardForm />
+      </div>
+      <footer>
+          Credit card icons by <a href="https://icons8.com/">Icons8</a>
+      </footer>
     </div>
   );
 }
