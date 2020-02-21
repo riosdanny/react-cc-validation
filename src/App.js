@@ -3,13 +3,7 @@ import Visa from './assets/icons8-visa.svg';
 import Mastercard from './assets/icons8-mastercard.svg';
 import Discover from './assets/icons8-discover.svg';
 import Amex from './assets/icons8-amex.svg';
-
-const prefixes = new Map([
-  ['Visa', '4'],
-  ['Mastercard', ['51', '52', '53', '54', '55']],
-  ['Discover', ['6011', '64', '65']],
-  ['Amex', ['34', '37']],
-]);
+import {prefixes} from './prefixes.js';
 
 const Logo = ({ type, alt, active }) => {
   let imgClass = 'cc-logo';
@@ -83,11 +77,12 @@ class CreditCardForm extends React.Component {
     and only present 3/4 options at any given
     time
   */
-  reset = (firstCard, secondCard, thirdCard) => {
+  reset = (firstCard, secondCard, thirdCard, fourthCard) => {
     this.setState({
       ['active' + firstCard]: false,
       ['active' + secondCard]: false,
       ['active' + thirdCard]: false,
+      ['active' + fourthCard]: true,
       validMessage: '',
     });
   }
@@ -99,22 +94,25 @@ class CreditCardForm extends React.Component {
         if (cardNumber.startsWith(value)) {
           this.setState({
             type: key[0],
-            ['active' + this.state.type]: true,
+            //['active' + key[0]]: true,
           });
 
           /* TODO: Find a better way to manage this. */
           switch (key[0]) {
             case 'Visa':
-              this.reset('Mastercard', 'Discover', 'Amex');
+              this.reset('Mastercard', 'Discover', 'Amex', 'Visa');
               break;
             case 'Mastercard':
-              this.reset('Visa', 'Discover', 'Amex');
+              this.reset('Visa', 'Discover', 'Amex', 'Mastercard');
               break;
             case 'Discover':
-              this.reset('Visa', 'Mastercard', 'Amex');
+              this.reset('Visa', 'Mastercard', 'Amex', 'Discover');
+              break;
+            case 'Amex':
+              this.reset('Visa', 'Mastercard', 'Discover', 'Amex');
               break;
             default:
-              this.reset('Visa', 'Mastercard', 'Discover');
+              break;
           }
 
           return;
@@ -123,6 +121,7 @@ class CreditCardForm extends React.Component {
           this.setState({
             ['active' + key[0]]: false,
             type: '',
+            validMessage: '',
           });
         }
       }
@@ -148,8 +147,11 @@ class CreditCardForm extends React.Component {
       }
     }
 
-    if (prevState.cardNumber.length !== this.state.maxLength
-        && prevState.cardNumber.length !== this.state.cardNumber.length) {
+    /* A chain like this just seems wrong. */
+    // prevState.cardNumber.length !== this.state.maxLength
+    if (
+         prevState.cardNumber.length !== this.state.cardNumber.length
+        && this.state.cardNumber.length === this.state.maxLength) {
           this.setState({
             validMessage: this.verifyNumber(),
           });
