@@ -60,6 +60,7 @@ footer a {
     margin: auto;
 
     display: grid;
+    grid-template-rows: auto 40px auto;
     justify-items: center;
     align-items: center;
 
@@ -72,6 +73,11 @@ footer a {
       0 41.8px 33.4px rgba(0, 0, 0, 0.028),
       0 100px 80px rgba(0, 0, 0, 0.02);
   }   
+}
+
+.error span {
+  margin: 0;
+  padding: 0;
 }
 
 .cc-logo {

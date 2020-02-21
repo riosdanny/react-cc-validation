@@ -37,9 +37,19 @@ class CreditCardForm extends React.Component {
       activeDiscover: false,
       activeAmex: false,
       type: '',
-      valid: false,
+      validMessage: '',
       error: {},
     };
+  }
+
+  getValid = () => {
+    if (this.state.validMessage !== '') {
+      return this.state.validMessage
+        ? 'Credit card number is valid'
+        : 'Credit card number is invalid';
+    }
+
+    return '';
   }
 
   verifyNumber = () => {
@@ -67,11 +77,18 @@ class CreditCardForm extends React.Component {
     return (sum + checkDigit) % 10 === 0;
   }
 
-  reset = (first, second, third) => {
+  /* 
+    Not sure of a better way to allow arguments
+    that are switched up depending on the call
+    and only present 3/4 options at any given
+    time
+  */
+  reset = (firstCard, secondCard, thirdCard) => {
     this.setState({
-      ['active' + first]: false,
-      ['active' + second]: false,
-      ['active' + third]: false,
+      ['active' + firstCard]: false,
+      ['active' + secondCard]: false,
+      ['active' + thirdCard]: false,
+      validMessage: '',
     });
   }
 
@@ -117,12 +134,10 @@ class CreditCardForm extends React.Component {
       this.determineType(this.state.cardNumber);
     }
 
-    if (prevState.cardNumber.length !== this.state.maxLength
-        && prevState.cardNumber.length !== this.state.cardNumber.length
-        && this.state.cardNumber.length >= 15) {
-          this.setState({
-            valid: this.verifyNumber(),
-          });
+    if (prevState.activeAmex !== this.state.activeAmex) {
+      this.state.activeAmex
+        ? this.setState({ maxLength: 15 })
+        : this.setState({ maxLength: 16 });
     }
 
     if (prevState.type !== this.state.type) {
@@ -133,10 +148,11 @@ class CreditCardForm extends React.Component {
       }
     }
 
-    if (prevState.activeAmex !== this.state.activeAmex) {
-      this.state.activeAmex
-        ? this.setState({ maxLength: 15 })
-        : this.setState({ maxLength: 16 });
+    if (prevState.cardNumber.length !== this.state.maxLength
+        && prevState.cardNumber.length !== this.state.cardNumber.length) {
+          this.setState({
+            validMessage: this.verifyNumber(),
+          });
     }
   }
 
@@ -149,6 +165,7 @@ class CreditCardForm extends React.Component {
   handleClick = (e) => {
     this.setState({
       cardNumber: '',
+      validMessage: '',
     });
   }
 
@@ -164,7 +181,9 @@ class CreditCardForm extends React.Component {
           />
           <button className="reset" onClick={this.handleClick}>reset</button>
         </div>
-        <div className="error"></div>
+        <div className="error">
+          <span>{this.getValid()}</span>
+        </div>
         <div>
         <Logo type={Visa} 
             alt="Visa"
