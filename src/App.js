@@ -37,8 +37,39 @@ class CreditCardForm extends React.Component {
       activeDiscover: false,
       activeAmex: false,
       type: '',
+      valid: false,
       error: {},
     };
+  }
+
+  verifyNumber = () => {
+    let sum = 0;
+    let temp = 0;
+    let cardNumberCopy = this.state.cardNumber;
+    let checkDigit = parseInt(this.state.cardNumber.slice(-1));
+    let parity = cardNumberCopy.length % 2;
+
+    for (let i = 0; i <= cardNumberCopy.length - 2; i++) {
+      if (i % 2 === parity) {
+        temp = (+cardNumberCopy[i]) * 2;
+        console.log("temp doubled: ", temp);
+      }
+      else {
+        temp = (+cardNumberCopy[i]);
+        console.log("temp single: ", temp);
+      }
+
+      if (temp > 9) {
+        temp -= 9;
+      }
+
+      console.log(`cardNumberCopy${i}'s temp: ${temp}`);
+      sum += temp;
+    }
+
+    console.log("overall sum: ", sum);
+    console.log("checkDigit: ", checkDigit);
+    return (sum + checkDigit) % 10 === 0;
   }
 
   reset = (first, second, third) => {
@@ -54,7 +85,6 @@ class CreditCardForm extends React.Component {
     for (let key of prefixes) {
       for (let value of key[1]) {
         if (cardNumber.startsWith(value)) {
-          console.log(`${key[0]}: startsWith(${value})`);
           this.setState({
             type: key[0],
             ['active' + this.state.type]: true,
@@ -78,7 +108,6 @@ class CreditCardForm extends React.Component {
           return;
         }
         else {
-          console.log("doesn't start with", value);
           this.setState({
             ['active' + key[0]]: false,
             type: '',
@@ -93,8 +122,13 @@ class CreditCardForm extends React.Component {
       this.determineType(this.state.cardNumber);
     }
 
+    if (prevState.cardNumber.length !== this.state.maxLength
+        && prevState.cardNumber.length !== this.state.cardNumber.length
+        && this.state.cardNumber.length >= 15) {
+      console.log("verifyNumber(): ", this.verifyNumber());
+    }
+
     if (prevState.type !== this.state.type) {
-      console.log("state check: ", this.state.type);
       if (this.state.type !== '') {
         this.setState({
           ['active' + this.state.type]: true,
@@ -160,7 +194,7 @@ class CreditCardForm extends React.Component {
 function App() {
   return (
     <div className="wrapper">
-      <h1 class="header">Credit Card Number Validator</h1>
+      <h1 className="header">Credit Card Number Validation</h1>
       <div className="cc-form">
         <CreditCardForm />
       </div>
