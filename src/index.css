@@ -16,35 +16,12 @@ html {
   margin-top: 12%; /* hacky, ugh */
 }
 
-.cc-form {
-  background: rgba(221, 221, 221, 0.562);
-  padding: 50px;
-  max-width: 400px;
-  min-height: 200px;
-  margin: auto;
-
-  display: grid;
-  grid-template-rows: [cc-num] 1fr [error] 30px [logo] 1fr;
-  justify-items: center;
-  align-items: center;
-
-  border-radius: 5px;
-  box-shadow:
-    0 2.8px 2.2px rgba(0, 0, 0, 0.07),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.05),
-    0 12.5px 10px rgba(0, 0, 0, 0.042),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.035),
-    0 41.8px 33.4px rgba(0, 0, 0, 0.028),
-    0 100px 80px rgba(0, 0, 0, 0.02);
-}
-
 .header {
   text-align: center;
 }
 
 .cc-form input {
   padding: 10px;
-  min-width: 300px;
 
   font-size: 150%;
 }
@@ -62,6 +39,30 @@ html {
   border: 0;
 
   flex: 1;
+}
+
+@media only screen and (min-device-width: 500px) {
+  .cc-form {
+    background: rgba(221, 221, 221, 0.562);
+    padding: 50px;
+    max-width: 400px;
+    min-width: 300px;
+    min-height: 200px;
+    margin: auto;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+
+    border-radius: 5px;
+    box-shadow:
+      0 2.8px 2.2px rgba(0, 0, 0, 0.07),
+      0 6.7px 5.3px rgba(0, 0, 0, 0.05),
+      0 12.5px 10px rgba(0, 0, 0, 0.042),
+      0 22.3px 17.9px rgba(0, 0, 0, 0.035),
+      0 41.8px 33.4px rgba(0, 0, 0, 0.028),
+      0 100px 80px rgba(0, 0, 0, 0.02);
+  }   
 }
 
 .cc-logo {
