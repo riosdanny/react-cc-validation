@@ -39,7 +39,7 @@ class CreditCardForm extends React.Component {
   getValid = () => {
     if (this.state.validMessage !== '') {
       return this.state.validMessage
-        ? 'Credit card number is valid'
+        ? 'Valid ✓'
         : 'Credit card number is invalid';
     }
 
@@ -149,8 +149,7 @@ class CreditCardForm extends React.Component {
 
     /* A chain like this just seems wrong. */
     // prevState.cardNumber.length !== this.state.maxLength
-    if (
-         prevState.cardNumber.length !== this.state.cardNumber.length
+    if (prevState.cardNumber.length !== this.state.cardNumber.length
         && this.state.cardNumber.length === this.state.maxLength) {
           this.setState({
             validMessage: this.verifyNumber(),
@@ -184,7 +183,10 @@ class CreditCardForm extends React.Component {
           <button className="reset" onClick={this.handleClick}>reset</button>
         </div>
         <div className="error">
-          <span>{this.getValid()}</span>
+          <span className=
+            { this.state.validMessage ? 'error valid' : 'error invalid' }>
+              { this.getValid() }
+          </span>
         </div>
         <div>
         <Logo type={Visa} 

@@ -79,6 +79,15 @@ footer a {
 .error span {
   margin: 0;
   padding: 0;
+  font-weight: bold;
+}
+
+.error.valid {
+  color: #2ECC40;
+}
+
+.error.invalid {
+  color: #FF4136;
 }
 
 .cc-logo {
