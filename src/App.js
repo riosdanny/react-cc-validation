@@ -52,23 +52,18 @@ class CreditCardForm extends React.Component {
     for (let i = 0; i <= cardNumberCopy.length - 2; i++) {
       if (i % 2 === parity) {
         temp = (+cardNumberCopy[i]) * 2;
-        console.log("temp doubled: ", temp);
       }
       else {
         temp = (+cardNumberCopy[i]);
-        console.log("temp single: ", temp);
       }
 
       if (temp > 9) {
         temp -= 9;
       }
 
-      console.log(`cardNumberCopy${i}'s temp: ${temp}`);
       sum += temp;
     }
 
-    console.log("overall sum: ", sum);
-    console.log("checkDigit: ", checkDigit);
     return (sum + checkDigit) % 10 === 0;
   }
 
@@ -125,7 +120,9 @@ class CreditCardForm extends React.Component {
     if (prevState.cardNumber.length !== this.state.maxLength
         && prevState.cardNumber.length !== this.state.cardNumber.length
         && this.state.cardNumber.length >= 15) {
-      console.log("verifyNumber(): ", this.verifyNumber());
+          this.setState({
+            valid: this.verifyNumber(),
+          });
     }
 
     if (prevState.type !== this.state.type) {
