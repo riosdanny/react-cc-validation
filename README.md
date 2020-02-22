@@ -49,4 +49,4 @@ Contributions are welcomed and encouraged.
 
 ![GitHub](https://img.shields.io/github/license/riosdcs/react-cc-validation?color=blue)
 
-This project is licensed under the [MIT license](LICENSE.md).
+This project is licensed under the [MIT license](LICENSE).
