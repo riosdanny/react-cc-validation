@@ -82,6 +82,7 @@ class CreditCardForm extends React.Component {
       ['active' + firstCard]: false,
       ['active' + secondCard]: false,
       ['active' + thirdCard]: false,
+      ['active' + fourthCard]: true,
       validMessage: '',
     });
   }
@@ -211,7 +212,7 @@ class CreditCardForm extends React.Component {
 
 function App() {
   return (
-    <div className="wrapper">
+    <>
       <h1 className="header">Credit Card Number Validation</h1>
       <div className="cc-form">
         <CreditCardForm />
@@ -219,7 +220,7 @@ function App() {
       <footer>
           Credit card icons by <a href="https://icons8.com/">Icons8</a>
       </footer>
-    </div>
+    </>
   );
 }
 
