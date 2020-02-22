@@ -77,7 +77,7 @@ class CreditCardForm extends React.Component {
     and only present 3/4 options at any given
     time
   */
-  reset = (firstCard, secondCard, thirdCard, fourthCard) => {
+  purgeInactive = (firstCard, secondCard, thirdCard, fourthCard) => {
     this.setState({
       ['active' + firstCard]: false,
       ['active' + secondCard]: false,
@@ -99,16 +99,16 @@ class CreditCardForm extends React.Component {
           /* TODO: Find a better way to manage this. */
           switch (key[0]) {
             case 'Visa':
-              this.reset('Mastercard', 'Discover', 'Amex', 'Visa');
+              this.purgeInactive('Mastercard', 'Discover', 'Amex', 'Visa');
               break;
             case 'Mastercard':
-              this.reset('Visa', 'Discover', 'Amex', 'Mastercard');
+              this.purgeInactive('Visa', 'Discover', 'Amex', 'Mastercard');
               break;
             case 'Discover':
-              this.reset('Visa', 'Mastercard', 'Amex', 'Discover');
+              this.purgeInactive('Visa', 'Mastercard', 'Amex', 'Discover');
               break;
             case 'Amex':
-              this.reset('Visa', 'Mastercard', 'Discover', 'Amex');
+              this.purgeInactive('Visa', 'Mastercard', 'Discover', 'Amex');
               break;
             default:
               break;
