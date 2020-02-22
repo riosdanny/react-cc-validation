@@ -31,14 +31,14 @@ class CreditCardForm extends React.Component {
       activeDiscover: false,
       activeAmex: false,
       type: '',
-      validMessage: '',
+      valid: '',
       error: {},
     };
   }
 
-  getValid = () => {
-    if (this.state.validMessage !== '') {
-      return this.state.validMessage
+  getValidMessage = () => {
+    if (this.state.valid !== '') {
+      return this.state.valid
         ? 'Valid ✓'
         : 'Credit card number is invalid';
     }
@@ -83,7 +83,7 @@ class CreditCardForm extends React.Component {
       ['active' + secondCard]: false,
       ['active' + thirdCard]: false,
       ['active' + fourthCard]: true,
-      validMessage: '',
+      valid: '',
     });
   }
 
@@ -120,7 +120,7 @@ class CreditCardForm extends React.Component {
           this.setState({
             ['active' + key[0]]: false,
             type: '',
-            validMessage: '',
+            valid: '',
           });
         }
       }
@@ -147,11 +147,10 @@ class CreditCardForm extends React.Component {
     }
 
     /* A chain like this just seems wrong. */
-    // prevState.cardNumber.length !== this.state.maxLength
     if (prevState.cardNumber.length !== this.state.cardNumber.length
         && this.state.cardNumber.length === this.state.maxLength) {
           this.setState({
-            validMessage: this.verifyNumber(),
+            valid: this.verifyNumber(),
           });
     }
   }
@@ -165,7 +164,7 @@ class CreditCardForm extends React.Component {
   handleClick = (e) => {
     this.setState({
       cardNumber: '',
-      validMessage: '',
+      valid: '',
     });
   }
 
@@ -183,8 +182,8 @@ class CreditCardForm extends React.Component {
         </div>
         <div className="error">
           <span className=
-            { this.state.validMessage ? 'error valid' : 'error invalid' }>
-              { this.getValid() }
+            { this.state.valid? 'error valid' : 'error invalid' }>
+              { this.getValidMessage() }
           </span>
         </div>
         <div>
