@@ -2,6 +2,10 @@
 
 A React component for verifying the potential validity of a credit card number using the [Luhn algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm).
 
+## Demo
+
+![Demonstration](demo/demo.gif)
+
 ## Features
 
 - Calculates potential validity of credit card number
@@ -29,7 +33,7 @@ View the app at `http://localhost:3000`.
 ## Known issues
 
 #### State update lag
-The state's `maxLength` property changes based on the issuer: 15 for American Express, 16 otherwise. However, if the user replaces text by selecting text and pasting, it may not trigger updates in time due to state updating asynchronously.
+The state's `maxLength` property changes based on the issuer: 15 for American Express, 16 otherwise. However, if the user replaces text by selecting text and pasting, it may not trigger updates in time due to state updating asynchronously. See [here](demo/selection_error.gif).
 
 #### Credit card number formatting
 Credit card numbers should follow their respective spacing as seen on their actual cards.
@@ -45,4 +49,4 @@ Contributions are welcomed and encouraged.
 
 ![GitHub](https://img.shields.io/github/license/riosdcs/react-cc-validation?color=blue)
 
-This project is licensed under the [MIT license](https://github.com/riosdcs/react-cc-validation/blob/master/LICENSE).
+This project is licensed under the [MIT license](LICENSE.md).
