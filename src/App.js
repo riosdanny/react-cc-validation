@@ -82,7 +82,6 @@ class CreditCardForm extends React.Component {
       ['active' + firstCard]: false,
       ['active' + secondCard]: false,
       ['active' + thirdCard]: false,
-      ['active' + fourthCard]: true,
       validMessage: '',
     });
   }
@@ -94,7 +93,6 @@ class CreditCardForm extends React.Component {
         if (cardNumber.startsWith(value)) {
           this.setState({
             type: key[0],
-            //['active' + key[0]]: true,
           });
 
           /* TODO: Find a better way to manage this. */
